@@ -25,7 +25,6 @@ module.exports = {
    */
   run: async (client, message, args, prefix, queue) => {
     // Code
-    if(message.content.startsWith("!setlang")){
       const langages = ["english", "french"]
       const newLanguageName = message.content.split(" ")[1];
       // If no new language is specified, returns an error message
@@ -42,6 +41,6 @@ module.exports = {
       const newLanguage = require(`./languages/${newLanguageName}`);
       // Send a success message
       message.channel.send(newLanguage("LANGUAGE_UPDATED"));
-  }
+
   },
 };
