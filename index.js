@@ -1,5 +1,6 @@
 const JUGNU = require("./handlers/Client");
 const { TOKEN } = require("./settings/config");
+let guildLanguages = require("./guilds-language.json");
 
 const client = new JUGNU();
 module.exports = client;
