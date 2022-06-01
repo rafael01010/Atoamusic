@@ -7,7 +7,7 @@ module.exports = {
   aliases: ["setlang"],
   description: `set language`,
   userPermissions: ["MANAGE_GUILD"],
-  botPermissions: ["MANAGE_GUILD"],
+  botPermissions: ["EMBED_LINKS"],
   category: "Settings",
   cooldown: 5,
   inVoiceChannel: false,
@@ -40,7 +40,9 @@ module.exports = {
       // Gets the new language
       const newLanguage = require(`./languages/${newLanguageName}`);
       // Send a success message
+      client.embed(message, `Ping :: \`${client.ws.ping}\``);
       message.channel.send(newLanguage("LANGUAGE_UPDATED"));
+      client.embed(message,newLanguage("LANGUAGE_UPDATED"));
 
   },
 };
