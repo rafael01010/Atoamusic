@@ -1,10 +1,12 @@
 const { Message } = require("discord.js");
 const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
+const fs = require('file-system');
+let guildLanguages = require("../../../guilds-language.json");
 
 module.exports = {
   name: "setlang",
-  aliases: ["setlang"],
+  aliases: ["lang"],
   description: `set language`,
   userPermissions: ["MANAGE_GUILD"],
   botPermissions: ["EMBED_LINKS"],
@@ -25,24 +27,29 @@ module.exports = {
    */
   run: async (client, message, args, prefix, queue) => {
     // Code
-      const langages = ["english", "french"]
-      const newLanguageName = message.content.split(" ")[1];
-      // If no new language is specified, returns an error message
-      if(!newLanguageName){
-          return message.channel.send(language("MISSING_LANGUAGE"));
-      }
-      if(!langages.includes(newLanguageName)){
-          return message.channel.send(language("LANGUAGE_NO_EXIST"));
-      }
-      // Update our json database
-      guildLanguages[message.guild.id] = newLanguageName;
-      fs.writeFileSync("./guilds-language.json", JSON.stringify(guildLanguages), "utf-8");
-      // Gets the new language
-      const newLanguage = require(`./languages/${newLanguageName}`);
-      // Send a success message
-      client.embed(message, `Ping :: \`${client.ws.ping}\``);
-      message.channel.send(newLanguage("LANGUAGE_UPDATED"));
-      client.embed(message,newLanguage("LANGUAGE_UPDATED"));
+    const guildLanguage = guildLanguages[message.guild.id] || "english"; // "english" will be the default language
+    const language = require(`../../../languages/${guildLanguage}`);
+    const langages = ["english", "portugues"]
+    let nPrefix = args[0];
+    const newLanguageName = nPrefix;
 
+    // If no new language is specified, returns an error message
+    if (!newLanguageName) {
+      return   client.embed(message, language("MISSING_LANGUAGE"));
+    }
+    if (!langages.includes(newLanguageName)) {
+      return client.embed(message, language("LANGUAGE_NO_EXIST"));
+    }
+
+    // Update our json database
+      guildLanguages[message.guild.id] = newLanguageName;
+      fs.writeFileSync("./guilds-language.json", JSON.stringify(guildLanguages));
+/*, "utf-8"*/
+    // Gets the new language
+     const newLanguage = require(`../../../languages/${newLanguageName}`);
+
+    // Send a success message
+    client.embed(message,newLanguage("LANGUAGE_UPDATED"));
+  
   },
 };

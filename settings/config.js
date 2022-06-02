@@ -1,8 +1,8 @@
 module.exports = {
   TOKEN:
     process.env.TOKEN ||
-    "BOT_TOKEN",
-  PREFIX: process.env.PREFIX || "BOT_PREFIX",
+    "OTExNjYwMzcwNjE4MzU5ODA4.YZkn4g.oYCrSCgesy9mxlv1mkpEXq1PjPg",
+  PREFIX: process.env.PREFIX || ".",
   embed: {
     color: process.env.color || "#220f80",
     wrongcolor: process.env.wrongcolor || "#8a0808",
@@ -73,8 +73,8 @@ module.exports = {
     inviteURL:
       process.env.inviteURL ||
       `https://discord.com/api/oauth2/authorize?client_id=BOTID&permissions=397619363185&scope=bot%20applications.commands`,
-    DiscordServer: process.env.DiscordServer || `https://discord.gg/PcUVWApWN3`,
-    VoteURL: process.env.VoteURL || `https://discord.gg/PcUVWApWN3`,
+    DiscordServer: process.env.DiscordServer || ``,
+    VoteURL: process.env.VoteURL || ``,
   },
   options: {
     embedFooter: true,

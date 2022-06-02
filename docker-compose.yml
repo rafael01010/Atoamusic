@@ -1,0 +1,13 @@
+version: '3.2'
+
+services:
+  test-app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/test-app
+      - "test_app_node_modules:/test-app/node_modules"
+volumes:
+  test_app_node_modules:
+    driver: local
