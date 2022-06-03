@@ -1,7 +1,7 @@
 module.exports = {
   TOKEN:
     process.env.TOKEN ||
-    "OTExNjYwMzcwNjE4MzU5ODA4.YZkn4g.oYCrSCgesy9mxlv1mkpEXq1PjPg",
+    "BotToken",
   PREFIX: process.env.PREFIX || ".",
   embed: {
     color: process.env.color || "#220f80",
