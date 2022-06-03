@@ -14,7 +14,7 @@ const languageData = {
     Statsdesc2: (allg) => ` :file_folder: \`${allg}\` Guilds \n `,
     Statsdesc3: (botup) => ` ⌚️ ${botup} Uptime \n`,
     Statsdesc4: (ms) =>`🏓 \`${ms}\` Ping \n  Made by [\` Rafael Soares \`]()**`,
-    "Commands":"Commands"
+    "Commands":"Commands",
     INVITE: (link) => `[\`Click to Invite Me\`](${link})`,
     "Users":"Users",
     "Servers":"Servers",
