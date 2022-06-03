@@ -1,7 +1,7 @@
 const languageData = {
     PING: (ms) => `**Pong!**\n Bot's latency: ${ms}ms`,
     LANGUAGE_UPDATED: "Bot language updated!",
-    MISSING_LANGUAGE: "You must specify a valid language! (english or french)",
+    MISSING_LANGUAGE: "You must specify a valid language! (english or portugues)",
     HELLO: "Hello!",
     LANGUAGE_NO_EXIST: "This langage doesn't exist!"
 };
