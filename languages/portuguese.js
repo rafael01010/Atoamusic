@@ -22,7 +22,8 @@ const languageData = {
     "CPU usage":"Utilização da CPU",
     "Platform":"Plataforma",
     "Memory Usage":"Uso de memória Ram",
-    "Uptime":"Tempo Ativo "
+    "Uptime":"Tempo Ativo ",
+    "Play":"reproduzir"
 };
 
 const translate = (key, ...args) => {
