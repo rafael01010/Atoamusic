@@ -1,7 +1,7 @@
 const { CommandInteraction } = require("discord.js");
 const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
-
+let guildLanguages = require("../../../guilds-language.json");
 module.exports = {
   name: "ping",
   description: `get ping of bot`,
@@ -24,6 +24,9 @@ module.exports = {
    */
   run: async (client, interaction, args, queue) => {
     // Code
-    client.embed(interaction, `Ping :: \`${client.ws.ping}\``);
+    const guildLanguage = guildLanguages[interaction.guild.id] || "english"; // "english" will be the default language
+    const language = require(`../../../languages/${guildLanguage}`);
+
+    client.embed(interaction,language("PING", client.ws.ping));
   },
 };

@@ -4,7 +4,7 @@ services:
   test-app:
     build: .
     ports:
-      - "3000:3000"
+      - "69:69"
     volumes:
       - .:/test-app
       - "test_app_node_modules:/test-app/node_modules"

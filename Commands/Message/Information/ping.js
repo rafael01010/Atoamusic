@@ -31,6 +31,6 @@ module.exports = {
     const guildLanguage = guildLanguages[message.guild.id] || "english"; // "english" will be the default language
     const language = require(`../../../languages/${guildLanguage}`);
 
-    client.embed(message,language("PING", client.ws.ping) );
+    client.embed(message,language("PING", client.ws.ping));
   },
 };

@@ -2,6 +2,7 @@ const { CommandInteraction } = require("discord.js");
 const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
 const { links } = require("../../../settings/config");
+let guildLanguages = require("../../../guilds-language.json");
 
 module.exports = {
   name: "invite",
@@ -25,12 +26,8 @@ module.exports = {
    */
   run: async (client, interaction, args, queue) => {
     // Code
-    client.embed(
-        interaction,
-        `[\`Click to Invite Me\`](${links.inviteURL.replace(
-          "BOTID",
-          client.user.id
-        )})`
-      );
+    const guildLanguage = guildLanguages[interaction.guild.id] || "english"; // "english" will be the default language
+    const language = require(`../../../languages/${guildLanguage}`);
+    client.embed(interaction, language("INVITE", links.inviteURL.replace("BOTID", client.user.id)));
   },
 };

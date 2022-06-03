@@ -29,7 +29,7 @@ module.exports = {
     // Code
     const guildLanguage = guildLanguages[message.guild.id] || "english"; // "english" will be the default language
     const language = require(`../../../languages/${guildLanguage}`);
-    const langages = ["english", "portugues"]
+    const langages = ["english", "portuguese"]
     let nPrefix = args[0];
     const newLanguageName = nPrefix;
 

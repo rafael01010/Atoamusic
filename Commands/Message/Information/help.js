@@ -6,10 +6,11 @@ const {
 } = require("discord.js");
 const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
+let guildLanguages = require("../../../guilds-language.json");
 
 module.exports = {
   name: "help",
-  aliases: ["h", "cmds", "commands"],
+  aliases: ["h", "cmds", "commands","ajuda","comandos"],
   description: `need help ? see my all commands`,
   userPermissions: [],
   botPermissions: ["EMBED_LINKS"],
@@ -30,7 +31,8 @@ module.exports = {
    */
   run: async (client, message, args, prefix, queue) => {
     // Code
-
+    const guildLanguage = guildLanguages[message.guild.id] || "english"; // "english" will be the default language
+    const language = require(`../../../languages/${guildLanguage}`);
     const emoji = {
       Information: "🔰",
       Music: "🎵",
@@ -46,20 +48,20 @@ module.exports = {
     let raw = new MessageActionRow().addComponents([
       new MessageSelectMenu()
         .setCustomId("help-menu")
-        .setPlaceholder(`Click to see my all Category`)
+        .setPlaceholder(language("Click to see my all Category"))
         .addOptions([
           {
-            label: `Home`,
+            label: language("Home"),
             value: "home",
             emoji: `🏘️`,
-            description: `Click to Go On HomePage`,
+            description: language(`Click to Go On HomePage`),
           },
           client.mcategories.map((cat) => {
             return {
               label: `${cat.toLocaleUpperCase()}`,
               value: cat,
               emoji: emoji[cat],
-              description: `Click to See Commands of ${cat}`,
+              description: language("CLICK", cat),
             };
           }),
         ]),
@@ -73,11 +75,12 @@ module.exports = {
       })
       .setThumbnail(message.guild.iconURL({ dynamic: true }))
       .setDescription(
-        `** An advanced  Music System with Audio Filtering A unique Music Request System and way much more! **`
+        language("** An advanced  Music System with Audio Filtering A unique Music Request System and way much more! **")
       )
       .addField(
-        `Stats`,
-        `>>> ** :gear: \`${allcommands}\` Commands \n :file_folder: \`${allguilds}\` Guilds \n ⌚️ ${botuptime} Uptime \n 🏓 \`${client.ws.ping}\` Ping \n  Made by [\` Rafael Soares \`]() **`
+        language(`Stats`),
+        //text desc
+        language(`Statsdesc1`, allcommands) + language(`Statsdesc2`, allguilds) + language(`Statsdesc3`, botuptime) + language(`Statsdesc4`, client.ws.ping),
       )
       .setFooter(client.getFooter(message.author));
 
@@ -93,11 +96,11 @@ module.exports = {
     });
     colector.on("collect", async (i) => {
       if (i.isSelectMenu()) {
-        await i.deferUpdate().catch((e) => {});
+        await i.deferUpdate().catch((e) => { });
         if (i.customId === "help-menu") {
           let [directory] = i.values;
           if (directory == "home") {
-            main_msg.edit({ embeds: [help_embed] }).catch((e) => {});
+            main_msg.edit({ embeds: [help_embed] }).catch((e) => { });
           } else {
             main_msg
               .edit({
@@ -105,7 +108,7 @@ module.exports = {
                   new MessageEmbed()
                     .setColor(client.config.embed.color)
                     .setTitle(
-                      `${emoji[directory]} ${directory} Commands ${emoji[directory]}`
+                      `${emoji[directory]} ${directory} `+language("Commands")+` ${emoji[directory]}`
                     )
                     .setThumbnail(message.guild.iconURL({ dynamic: true }))
                     .setDescription(
@@ -127,7 +130,7 @@ module.exports = {
 
     colector.on("end", async (c, i) => {
       raw.components.forEach((c) => c.setDisabled(true));
-      main_msg.edit({ components: [raw] }).catch((e) => {});
+      main_msg.edit({ components: [raw] }).catch((e) => { });
     });
   },
 };

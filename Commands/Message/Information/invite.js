@@ -2,7 +2,7 @@ const { Message } = require("discord.js");
 const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
 const { links } = require("../../../settings/config");
-
+let guildLanguages = require("../../../guilds-language.json");
 module.exports = {
   name: "invite",
   aliases: ["inv", "addme"],
@@ -26,12 +26,9 @@ module.exports = {
    */
   run: async (client, message, args, prefix, queue) => {
     // Code
-    client.embed(
-      message,
-      `[\`Click to Invite Me\`](${links.inviteURL.replace(
-        "BOTID",
-        client.user.id
-      )})`
+    const guildLanguage = guildLanguages[message.guild.id] || "english"; // "english" will be the default language
+    const language = require(`../../../languages/${guildLanguage}`);
+    client.embed(message, language("INVITE", links.inviteURL.replace("BOTID", client.user.id))
     );
   },
 };
