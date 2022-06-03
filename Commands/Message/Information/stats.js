@@ -3,6 +3,8 @@ const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
 let os = require("os");
 let cpuStat = require("cpu-stat");
+let guildLanguages = require("../../../guilds-language.json");
+
 
 module.exports = {
   name: "stats",
@@ -27,6 +29,8 @@ module.exports = {
    */
   run: async (client, message, args, prefix, queue) => {
     // Code
+    const guildLanguage = guildLanguages[message.guild.id] || "english"; // "english" will be the default language
+    const language = require(`../../../languages/${guildLanguage}`);
     cpuStat.usagePercent(function (err, percent, seconds) {
       message.reply({
         embeds: [
@@ -36,20 +40,20 @@ module.exports = {
               name: client.user.username,
               iconURL: client.user.displayAvatarURL({ dynamic: true }),
             })
-            .setTitle("__**Stats:**__")
+            .setTitle("__**"+language('Stats')+":**__")
             .addField(
-              "⏳ Memory Usage",
+              "⏳ "+language('Memory Usage'),
               `\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(
                 2
               )}\` / \`${(os.totalmem() / 1024 / 1024).toFixed(2)} MB\``
             )
             .addField(
-              "⌚️ Uptime ",
+              "⌚️ "+language('Uptime'),
               `<t:${Math.floor(Date.now() / 1000 - client.uptime / 1000)}:R>`
             )
-            .addField("📁 Users", `\`${client.guilds.cache.size.reduce((a,b) => a + b.memberCount, 0)}\``, true)
-            .addField("📁 Servers", `\`${client.guilds.cache.size}\``, true)
-            .addField("📁 Channels", `\`${client.channels.cache.size}\``, true)
+            .addField("📁 "+language('Users'), `\`${client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)}\``, true)
+            .addField("📁 "+language('Servers'), `\`${client.guilds.cache.size}\``, true)
+            .addField("📁 "+language('Channels'), `\`${client.channels.cache.size}\``, true)
             .addField("👾 Discord.js", `\`v${version}\``, true)
             .addField("🤖 Node", `\`${process.version}\``, true)
             .addField("🏓 Ping", `\`${client.ws.ping}ms\``, true)
@@ -57,10 +61,10 @@ module.exports = {
               "🤖 CPU",
               `\`\`\`md\n${os.cpus().map((i) => `${i.model}`)[0]}\`\`\``
             )
-            .addField("🤖 CPU usage", `\`${percent.toFixed(2)}%\``, true)
+            .addField("🤖 "+language('CPU usage'), `\`${percent.toFixed(2)}%\``, true)
             .addField("🤖 Arch", `\`${os.arch()}\``, true)
             // .addField("\u200b", `\u200b`)
-            .addField("💻 Platform", `\`\`${os.platform()}\`\``, true)
+            .addField("💻 "+language('Platform'), `\`\`${os.platform()}\`\``, true)
             .setFooter(client.getFooter(message.author)),
         ],
       });

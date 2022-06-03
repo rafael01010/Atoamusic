@@ -15,7 +15,14 @@ const languageData = {
     Statsdesc3: (botup) => ` ⌚️ ${botup} Tempo de atividade \n`,
     Statsdesc4: (ms) =>`🏓 \`${ms}\` Ping \n  Feito por [\` Rafael Soares \`]()**`,
     "Commands":"Comandos",
-    INVITE: (link) => `[\`Clique para me convidar\`](${link})`
+    INVITE: (link) => `[\`Clique para me convidar\`](${link})`,
+    "Users":"Utilizadores",
+    "Servers":"Servidores",
+    "Channels":"Canais",
+    "CPU usage":"Utilização da CPU",
+    "Platform":"Plataforma",
+    "Memory Usage":"Uso de memória Ram",
+    "Uptime":"Tempo Ativo "
 };
 
 const translate = (key, ...args) => {

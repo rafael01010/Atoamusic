@@ -11,3 +11,4 @@ npx
 node_etw_provider.man
 settings/config.js
 guilds-language.json
+data/*
