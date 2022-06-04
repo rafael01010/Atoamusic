@@ -2,6 +2,7 @@ const client = require("../index");
 
 client.on("ready", async () => {
   console.log(`${client.user.username} Is Online`);
+  console.log(`Started`);
   client.user.setActivity({
     name: `@${client.user.username} /help`,
     type: "PLAYING",
